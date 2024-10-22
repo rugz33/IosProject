@@ -17,6 +17,8 @@
 		BB13A56C2CC263E800D1ED6C /* IosProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BB13A56B2CC263E800D1ED6C /* IosProjectTests.m */; };
 		BB13A5762CC263E800D1ED6C /* IosProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BB13A5752CC263E800D1ED6C /* IosProjectUITests.m */; };
 		BB13A5782CC263E800D1ED6C /* IosProjectUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BB13A5772CC263E800D1ED6C /* IosProjectUITestsLaunchTests.m */; };
+		BB7472582CC7A76D00F7884A /* DataList.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7472572CC7A76D00F7884A /* DataList.m */; };
+		BB74725B2CC7DFD600F7884A /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB74725A2CC7DFD600F7884A /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,9 @@
 		BB13A5752CC263E800D1ED6C /* IosProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IosProjectUITests.m; sourceTree = "<group>"; };
 		BB13A5772CC263E800D1ED6C /* IosProjectUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IosProjectUITestsLaunchTests.m; sourceTree = "<group>"; };
 		BB13A5852CC269E700D1ED6C /* DataList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataList.h; sourceTree = "<group>"; };
+		BB7472572CC7A76D00F7884A /* DataList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataList.m; sourceTree = "<group>"; };
+		BB7472592CC7DFC200F7884A /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		BB74725A2CC7DFD600F7884A /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +110,7 @@
 		BB13A54E2CC263E600D1ED6C /* IosProject */ = {
 			isa = PBXGroup;
 			children = (
+				BB7472562CC7A75000F7884A /* Model */,
 				BB13A54F2CC263E600D1ED6C /* AppDelegate.h */,
 				BB13A5502CC263E600D1ED6C /* AppDelegate.m */,
 				BB13A5522CC263E600D1ED6C /* SceneDelegate.h */,
@@ -116,7 +122,8 @@
 				BB13A55D2CC263E800D1ED6C /* LaunchScreen.storyboard */,
 				BB13A5602CC263E800D1ED6C /* Info.plist */,
 				BB13A5612CC263E800D1ED6C /* main.m */,
-				BB13A5852CC269E700D1ED6C /* DataList.h */,
+				BB7472592CC7DFC200F7884A /* DetailViewController.h */,
+				BB74725A2CC7DFD600F7884A /* DetailViewController.m */,
 			);
 			path = IosProject;
 			sourceTree = "<group>";
@@ -136,6 +143,15 @@
 				BB13A5772CC263E800D1ED6C /* IosProjectUITestsLaunchTests.m */,
 			);
 			path = IosProjectUITests;
+			sourceTree = "<group>";
+		};
+		BB7472562CC7A75000F7884A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BB13A5852CC269E700D1ED6C /* DataList.h */,
+				BB7472572CC7A76D00F7884A /* DataList.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,9 +285,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB13A5572CC263E700D1ED6C /* ViewController.m in Sources */,
+				BB7472582CC7A76D00F7884A /* DataList.m in Sources */,
 				BB13A5512CC263E600D1ED6C /* AppDelegate.m in Sources */,
 				BB13A5622CC263E800D1ED6C /* main.m in Sources */,
 				BB13A5542CC263E600D1ED6C /* SceneDelegate.m in Sources */,
+				BB74725B2CC7DFD600F7884A /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

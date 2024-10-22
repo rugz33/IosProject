@@ -9,8 +9,10 @@
 
 @interface DataList : NSObject
 
-@property (nonatomic, retain) NSString *id;
+@property (nonatomic, assign) NSInteger dataId;
 @property (nonatomic, retain) NSString *title;
+@property (nonatomic, assign) NSInteger userId;
+@property (nonatomic, retain) NSString *body;
 
 - (id)initWithDictionary:(NSDictionary*)dict;
 @end

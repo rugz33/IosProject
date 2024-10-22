@@ -7,31 +7,55 @@
 
 #import "ViewController.h"
 #import "DataList.h"
+#import "DetailViewController.h"
 
-@interface ViewController ()
-
+@interface ViewController (){
+    __weak IBOutlet UITextField *tfSearch;
+    __weak IBOutlet UIButton *btnSearch;
+    
+    NSArray *filteredData;
+    DataList *selectedData;
+}
 @end
 
 @implementation ViewController
-NSMutableArray *datas;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    datas = [[NSMutableArray alloc] init];
+    filteredData = [[NSMutableArray alloc] init];
+    
+    [self.tableView setDelegate:self];
+    [self.tableView setDataSource:self];
+    
     [self hitAPI];
 }
 
+- (IBAction)btnSearchOnClick:(id)sender {
+    NSString *searchTitle = tfSearch.text;
+    
+    if (![searchTitle isEqual:@""]) {
+        NSPredicate *bPredicate = [NSPredicate predicateWithFormat:@"SELF.title contains[cd] %@",tfSearch.text];
+        self->filteredData = [self->datas filteredArrayUsingPredicate:bPredicate];
+    } else {
+        self->filteredData = self->datas;
+    }
+    
+    [self.tableView reloadData];
+}
+
+
 - (void)hitAPI {
     [self callAPI:@"https://jsonplaceholder.typicode.com/posts" res:^(NSDictionary * _Nullable json, NSError * _Nullable error) {
-        NSLog(@"res %@, err %@", json, error);
-        
-        
-        NSArray *array = [[NSMutableArray alloc] initWithArray:json];
-        for(NSDictionary *dataDict in array){
+        for(NSDictionary *dataDict in json){
             DataList *dataList = [[DataList alloc] initWithDictionary:dataDict];
-            [datas addObject:dataList];
+            [self->datas addObject:dataList];
         }
+        
+        self->filteredData = self->datas;
+        [self.tableView reloadData];
     }];
 }
 
@@ -98,16 +122,45 @@ NSMutableArray *datas;
                 }] resume];
 }
 
+#pragma mark - Table view data source
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return datas.count;
+    return self->filteredData.count;
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    cell.textLabel.text = datas[indexPath.row];
+    
+    DataList *dataList = self->filteredData[indexPath.row];
+
+    [(UILabel *)[cell viewWithTag:1]setText:[NSString stringWithFormat:@"%ld",(long)dataList.dataId]];
+    [(UILabel *)[cell viewWithTag:2]setText:dataList.title];
+    
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   return 80;
+}
 
+#pragma mark - Table View Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (datas.count > 0) {
+        selectedData = self->filteredData[indexPath.row];
+        [self performSegueWithIdentifier:@"segueToDetail" sender:self];
+    }
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+
+    if ([segue.identifier isEqualToString:@"segueToDetail"]){
+        DetailViewController *vc = segue.destinationViewController;
+        vc.data = selectedData;
+    }
+}
 
 @end
